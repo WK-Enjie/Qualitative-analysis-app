@@ -99,44 +99,29 @@ select { width: 100%; padding: 10px; margin-bottom: 15px; font-size: 1rem; }
 }
 
 /* 3. PRECIPITATES (Grains) */
-
-/* WHITE PPT */
 .ppt-white {
     background-color: rgba(255, 255, 255, 0.95);
-    background-image: 
-        radial-gradient(#999 15%, transparent 16%),
-        radial-gradient(#bbb 15%, transparent 16%);
-    background-size: 10px 10px, 15px 15px;
-    background-position: 0 0, 7px 7px;
-    opacity: 1;
-    height: 50% !important;
+    background-image: radial-gradient(#999 15%, transparent 16%), radial-gradient(#bbb 15%, transparent 16%);
+    background-size: 10px 10px, 15px 15px; background-position: 0 0, 7px 7px;
+    opacity: 1; height: 50% !important;
 }
 
-/* BLUE PPT */
 .ppt-blue {
     background-color: #5dade2;
     background-image: radial-gradient(#2980b9 15%, transparent 16%), radial-gradient(#3498db 15%, transparent 16%);
-    background-size: 8px 8px, 12px 12px;
-    opacity: 1;
-    height: 50% !important;
+    background-size: 8px 8px, 12px 12px; opacity: 1; height: 50% !important;
 }
 
-/* GREEN PPT */
 .ppt-green {
     background-color: #58d68d;
     background-image: radial-gradient(#27ae60 15%, transparent 16%), radial-gradient(#2ecc71 15%, transparent 16%);
-    background-size: 8px 8px, 12px 12px;
-    opacity: 1;
-    height: 50% !important;
+    background-size: 8px 8px, 12px 12px; opacity: 1; height: 50% !important;
 }
 
-/* RED-BROWN PPT */
 .ppt-red {
     background-color: #c0392b;
     background-image: radial-gradient(#922b21 15%, transparent 16%), radial-gradient(#a93226 15%, transparent 16%);
-    background-size: 10px 10px, 14px 14px;
-    opacity: 1;
-    height: 50% !important;
+    background-size: 10px 10px, 14px 14px; opacity: 1; height: 50% !important;
 }
 
 .excess { height: 80% !important; }
@@ -146,11 +131,49 @@ select { width: 100%; padding: 10px; margin-bottom: 15px; font-size: 1rem; }
 .equation-box { margin-top: 10px; background: #e8f4f8; padding: 10px; border-radius: 5px; text-align: center; width: 100%; border: 1px solid #b3d7ff; }
 .equation-text { font-family: 'Georgia', serif; font-style: italic; color: #2c3e50; font-size: 1rem; }
 
-/* QUIZ */
+/* --- QUIZ STYLES --- */
 .quiz-container { background: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.score-display { font-size: 1.2rem; margin-bottom: 20px; color: var(--primary); font-weight: bold; }
 .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
 .options-grid button { padding: 15px; background: var(--dark); color: white; border: none; cursor: pointer; border-radius: 4px; font-size: 1rem; }
 .feedback { margin-top: 15px; font-weight: bold; min-height: 20px; }
 #nextBtn { margin-top: 20px; padding: 10px 20px; background: #27ae60; color: white; border: none; cursor: pointer; display: none; }
+
+/* --- FLOWCHART STYLES --- */
+.flowchart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+.flow-step {
+    background: #e8f4f8;
+    border: 2px solid #3498db;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 500;
+    max-width: 80%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.flow-unknown {
+    background: #2c3e50;
+    color: white;
+    border-color: #2c3e50;
+}
+.flow-arrow {
+    font-size: 20px;
+    color: #555;
+    margin: 5px 0;
+    font-weight: bold;
+}
+.flow-action {
+    font-size: 0.8rem;
+    color: #666;
+    background: #fff;
+    padding: 2px 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
