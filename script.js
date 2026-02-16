@@ -78,155 +78,151 @@ function resetLab() {
     eqText.innerHTML = 'No reaction yet.';
 }
 
-// --- EXTENDED QUIZ BANK (18 Questions) ---
+// --- QUESTION BANK (Compound Identification) ---
 const questionBank = [
-    // FLOWCHART QUESTIONS (Branching)
+    // --- COMPOUND 1: ZINC CHLORIDE ---
     { 
         html: `
             <div class="flowchart-container">
                 <div class="flow-unknown">Unknown Solution P</div>
-                <div class="flow-split">
-                    <div class="flow-branch">
-                        <div class="flow-arrow">↙</div>
-                        <div class="flow-action">+ Aq. NaOH (Excess)</div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-result">Ppt dissolves in excess</div>
+                <div class="flow-split-wrapper">
+                    <div class="flow-col">
+                        <div class="flow-header">Cation Test</div>
+                        <div class="flow-box">+ Aq. NaOH &rarr; White Ppt (Soluble in excess)</div>
+                        <div class="flow-box">+ Aq. Ammonia &rarr; White Ppt (Soluble in excess)</div>
                     </div>
-                    <div class="flow-branch">
-                        <div class="flow-arrow">↘</div>
-                        <div class="flow-action">+ Aq. Ammonia (Excess)</div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-result">Ppt remains insoluble</div>
+                    <div class="flow-col">
+                        <div class="flow-header">Anion Test</div>
+                        <div class="flow-box">+ Dil. HNO₃</div>
+                        <div class="flow-box">+ Silver Nitrate</div>
+                        <div class="flow-box flow-result">White Precipitate</div>
                     </div>
                 </div>
             </div>
-            <p>Identify Solution P.</p>
+            <p>Identify Compound P.</p>
         `,
-        options: ["Zinc (Zn²⁺)", "Aluminium (Al³⁺)", "Calcium (Ca²⁺)", "Lead (Pb²⁺)"], 
-        a: 1 
+        options: ["Zinc Chloride", "Aluminium Chloride", "Calcium Chloride", "Zinc Sulfate"], 
+        a: 0 // Zinc Chloride
     },
+    // --- COMPOUND 2: IRON(II) SULFATE ---
     { 
         html: `
             <div class="flowchart-container">
                 <div class="flow-unknown">Unknown Solution Q</div>
-                <div class="flow-split">
-                    <div class="flow-branch">
-                        <div class="flow-arrow">↙</div>
-                        <div class="flow-action">+ Aq. NaOH</div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-result">Light Blue Ppt</div>
+                <div class="flow-split-wrapper">
+                    <div class="flow-col">
+                        <div class="flow-header">Cation Test</div>
+                        <div class="flow-box">+ Aq. NaOH &rarr; Green Ppt (Insoluble in excess)</div>
+                        <div class="flow-box">+ Aq. Ammonia &rarr; Green Ppt (Insoluble in excess)</div>
                     </div>
-                    <div class="flow-branch">
-                        <div class="flow-arrow">↘</div>
-                        <div class="flow-action">+ Aq. Ammonia (Excess)</div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-result">Deep Blue Solution</div>
+                    <div class="flow-col">
+                        <div class="flow-header">Anion Test</div>
+                        <div class="flow-box">+ Dil. HNO₃</div>
+                        <div class="flow-box">+ Barium Nitrate</div>
+                        <div class="flow-box flow-result">White Precipitate</div>
                     </div>
                 </div>
             </div>
-            <p>Identify Solution Q.</p>
+            <p>Identify Compound Q.</p>
         `,
-        options: ["Iron(II)", "Copper(II)", "Zinc", "Calcium"], 
-        a: 1 
+        options: ["Iron(II) Nitrate", "Iron(III) Sulfate", "Iron(II) Sulfate", "Copper(II) Sulfate"], 
+        a: 2 // Iron(II) Sulfate
     },
+    // --- COMPOUND 3: ALUMINIUM IODIDE ---
     { 
         html: `
             <div class="flowchart-container">
                 <div class="flow-unknown">Unknown Solution R</div>
-                <div class="flow-split">
-                    <div class="flow-branch">
-                        <div class="flow-arrow">↙</div>
-                        <div class="flow-action">+ Aq. NaOH (Excess)</div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-result">Ppt dissolves</div>
+                <div class="flow-split-wrapper">
+                    <div class="flow-col">
+                        <div class="flow-header">Cation Test</div>
+                        <div class="flow-box">+ Aq. NaOH &rarr; White Ppt (Soluble in excess)</div>
+                        <div class="flow-box">+ Aq. Ammonia &rarr; White Ppt (Insoluble in excess)</div>
                     </div>
-                    <div class="flow-branch">
-                        <div class="flow-arrow">↘</div>
-                        <div class="flow-action">+ Aq. Ammonia (Excess)</div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-result">Ppt dissolves</div>
+                    <div class="flow-col">
+                        <div class="flow-header">Anion Test</div>
+                        <div class="flow-box">+ Dil. HNO₃</div>
+                        <div class="flow-box">+ Silver Nitrate</div>
+                        <div class="flow-box flow-result">Yellow Precipitate</div>
                     </div>
                 </div>
             </div>
-            <p>Identify Solution R.</p>
+            <p>Identify Compound R.</p>
         `,
-        options: ["Zinc (Zn²⁺)", "Aluminium (Al³⁺)", "Calcium (Ca²⁺)", "Copper (Cu²⁺)"], 
-        a: 0 
+        options: ["Zinc Iodide", "Aluminium Iodide", "Aluminium Chloride", "Lead Iodide"], 
+        a: 1 // Al Iodide
     },
+    // --- COMPOUND 4: COPPER(II) CARBONATE ---
     { 
         html: `
             <div class="flowchart-container">
-                <div class="flow-unknown">Unknown Solution S</div>
-                <div class="flow-split">
-                    <div class="flow-branch">
-                        <div class="flow-arrow">↙</div>
-                        <div class="flow-action">+ Aq. NaOH</div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-result">Green Ppt</div>
+                <div class="flow-unknown">Unknown Solid S</div>
+                <div class="flow-split-wrapper">
+                    <div class="flow-col">
+                        <div class="flow-header">Cation Test (in soln)</div>
+                        <div class="flow-box">+ Aq. Ammonia &rarr; Light Blue Ppt</div>
+                        <div class="flow-box">+ Excess Ammonia &rarr; Deep Blue Solution</div>
                     </div>
-                    <div class="flow-branch">
-                        <div class="flow-arrow">↘</div>
-                        <div class="flow-action">+ Aq. Ammonia</div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-result">Green Ppt</div>
+                    <div class="flow-col">
+                        <div class="flow-header">Anion Test</div>
+                        <div class="flow-box">+ Dilute Acid</div>
+                        <div class="flow-box flow-result">Effervescence (Gas turns limewater milky)</div>
                     </div>
                 </div>
             </div>
-            <p>Identify Solution S.</p>
+            <p>Identify Compound S.</p>
         `,
-        options: ["Iron(II)", "Iron(III)", "Copper(II)", "Chromium(III)"], 
-        a: 0 
+        options: ["Copper(II) Sulfate", "Copper(II) Chloride", "Copper(II) Carbonate", "Iron(II) Carbonate"], 
+        a: 2 // Copper Carbonate
     },
+    // --- COMPOUND 5: CALCIUM NITRATE ---
     { 
         html: `
             <div class="flowchart-container">
-                <div class="flow-unknown">Unknown Anion T</div>
-                <div class="flow-split">
-                    <div class="flow-branch">
-                        <div class="flow-action">Test 1</div>
-                        <div class="flow-action">+ Dilute Nitric Acid</div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-result">No Gas</div>
+                <div class="flow-unknown">Unknown Solution T</div>
+                <div class="flow-split-wrapper">
+                    <div class="flow-col">
+                        <div class="flow-header">Cation Test</div>
+                        <div class="flow-box">+ Aq. NaOH &rarr; White Ppt (Insoluble)</div>
+                        <div class="flow-box">+ Aq. Ammonia &rarr; No Precipitate</div>
                     </div>
-                    <div class="flow-branch">
-                        <div class="flow-action">Test 2</div>
-                        <div class="flow-action">+ Silver Nitrate</div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-result">Yellow Ppt</div>
+                    <div class="flow-col">
+                        <div class="flow-header">Anion Test</div>
+                        <div class="flow-box">+ NaOH + Al Foil + Heat</div>
+                        <div class="flow-box flow-result">Gas produced turns red litmus blue</div>
                     </div>
                 </div>
             </div>
-            <p>Identify Anion T.</p>
+            <p>Identify Compound T.</p>
         `,
-        options: ["Chloride", "Sulfate", "Iodide", "Nitrate"], 
-        a: 2 
+        options: ["Calcium Chloride", "Calcium Nitrate", "Zinc Nitrate", "Ammonium Nitrate"], 
+        a: 1 // Calcium Nitrate
     },
+    // --- COMPOUND 6: AMMONIUM CHLORIDE ---
     { 
         html: `
             <div class="flowchart-container">
                 <div class="flow-unknown">Unknown Solution U</div>
-                <div class="flow-split">
-                    <div class="flow-branch">
-                        <div class="flow-arrow">↙</div>
-                        <div class="flow-action">+ Aq. NaOH</div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-result">White Ppt</div>
+                <div class="flow-split-wrapper">
+                    <div class="flow-col">
+                        <div class="flow-header">Cation Test</div>
+                        <div class="flow-box">+ NaOH + Warm</div>
+                        <div class="flow-box flow-result">Pungent gas produced</div>
                     </div>
-                    <div class="flow-branch">
-                        <div class="flow-arrow">↘</div>
-                        <div class="flow-action">+ Aq. Ammonia</div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-result">No Ppt / Very Slight</div>
+                    <div class="flow-col">
+                        <div class="flow-header">Anion Test</div>
+                        <div class="flow-box">+ Dil. HNO₃ + AgNO₃</div>
+                        <div class="flow-box flow-result">White Precipitate</div>
                     </div>
                 </div>
             </div>
-            <p>Identify Solution U.</p>
+            <p>Identify Compound U.</p>
         `,
-        options: ["Zinc", "Aluminium", "Calcium", "Ammonium"], 
-        a: 2 
+        options: ["Ammonium Sulfate", "Ammonium Chloride", "Zinc Chloride", "Sodium Chloride"], 
+        a: 1 // Ammonium Chloride
     },
     
-    // TEXT QUESTIONS
+    // --- TEXT QUESTIONS (General Knowledge) ---
     { q: "Which gas turns damp red litmus paper blue?", options: ["Chlorine", "Ammonia", "Oxygen", "Hydrogen"], a: 1 },
     { q: "Which ion forms a white precipitate with acidified Silver Nitrate?", options: ["Chloride", "Sulfate", "Nitrate", "Carbonate"], a: 0 },
     { q: "What is observed when Aqueous Sodium Hydroxide is added to Iron(III) ions?", options: ["White ppt", "Red-brown ppt", "Green ppt", "Blue ppt"], a: 1 },
@@ -258,7 +254,7 @@ function startQuiz() {
     qIdx = 0;
     score = 0;
     const shuffled = shuffleArray([...questionBank]);
-    currentQuiz = shuffled.slice(0, 6); // Pick 6
+    currentQuiz = shuffled.slice(0, 6); // Pick 6 random questions
     document.getElementById('totalVal').innerText = currentQuiz.length;
     document.getElementById('scoreVal').innerText = "0";
     loadQuestion();
