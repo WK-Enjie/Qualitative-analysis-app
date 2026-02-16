@@ -1,283 +1,306 @@
-// --- Game State ---
-let questions = [];
-let currentIdx = 0;
-let score = 0;
-let nianHP = 100;
-let combo = 0;
-let maxCombo = 0;
+// --- NAV ---
+function showSection(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active-section'));
+    document.getElementById(id).classList.add('active-section');
+}
 
-// Timing Variables
-let questionStartTime;
-let timerInterval;
-const TIME_LIMIT = 15000; // 15 seconds per question for calculation (bar goes down)
+function openTab(id) {
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active-content'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
+    document.getElementById(id).classList.add('active-content');
+    event.currentTarget.classList.add('active-tab');
+}
 
-// --- DOM Elements ---
-const screens = {
-    login: document.getElementById('login-screen'),
-    game: document.getElementById('game-screen'),
-    end: document.getElementById('end-screen')
+// --- VIRTUAL LAB ---
+const chemical = document.getElementById('chemical');
+const obsText = document.getElementById('obsText');
+const eqText = document.getElementById('eqText');
+
+// Reaction Data
+const reactions = {
+    'zn': {
+        'naoh_few': { 
+            t: 'White precipitate formed.', 
+            c: 'ppt-white', 
+            e: 'Zn<sup>2+</sup>(aq) + 2OH<sup>-</sup>(aq) &rarr; Zn(OH)<sub>2</sub>(s)' 
+        },
+        'naoh_excess': { 
+            t: 'Precipitate dissolves to form a colorless solution.', 
+            c: 'clear excess', 
+            e: 'Precipitate dissolves (No precipitation equation).' 
+        },
+        'nh3_few': { 
+            t: 'White precipitate formed.', 
+            c: 'ppt-white', 
+            e: 'Zn<sup>2+</sup>(aq) + 2OH<sup>-</sup>(aq) &rarr; Zn(OH)<sub>2</sub>(s)' 
+        },
+        'nh3_excess': { 
+            t: 'Precipitate dissolves to form a colorless solution.', 
+            c: 'clear excess', 
+            e: 'Precipitate dissolves (No precipitation equation).' 
+        }
+    },
+    'al': {
+        'naoh_few': { 
+            t: 'White precipitate formed.', 
+            c: 'ppt-white', 
+            e: 'Al<sup>3+</sup>(aq) + 3OH<sup>-</sup>(aq) &rarr; Al(OH)<sub>3</sub>(s)' 
+        },
+        'naoh_excess': { 
+            t: 'Precipitate dissolves to form a colorless solution.', 
+            c: 'clear excess', 
+            e: 'Precipitate dissolves (No precipitation equation).' 
+        },
+        'nh3_few': { 
+            t: 'White precipitate formed.', 
+            c: 'ppt-white', 
+            e: 'Al<sup>3+</sup>(aq) + 3OH<sup>-</sup>(aq) &rarr; Al(OH)<sub>3</sub>(s)' 
+        },
+        'nh3_excess': { 
+            t: 'White precipitate remains (Insoluble).', 
+            c: 'ppt-white excess', 
+            e: 'Precipitate remains insoluble.' 
+        }
+    },
+    'ca': {
+        'naoh_few': { 
+            t: 'White precipitate formed.', 
+            c: 'ppt-white', 
+            e: 'Ca<sup>2+</sup>(aq) + 2OH<sup>-</sup>(aq) &rarr; Ca(OH)<sub>2</sub>(s)' 
+        },
+        'naoh_excess': { 
+            t: 'White precipitate remains (Insoluble).', 
+            c: 'ppt-white excess', 
+            e: 'Precipitate remains insoluble.' 
+        },
+        'nh3_few': { 
+            t: 'No precipitate formed (or very slight).', 
+            c: 'clear', 
+            e: 'No observable reaction.' 
+        },
+        'nh3_excess': { 
+            t: 'No precipitate formed.', 
+            c: 'clear excess', 
+            e: 'No observable reaction.' 
+        }
+    },
+    'cu': {
+        'naoh_few': { 
+            t: 'Light blue precipitate formed.', 
+            c: 'ppt-blue', 
+            e: 'Cu<sup>2+</sup>(aq) + 2OH<sup>-</sup>(aq) &rarr; Cu(OH)<sub>2</sub>(s)' 
+        },
+        'naoh_excess': { 
+            t: 'Light blue precipitate remains (Insoluble).', 
+            c: 'ppt-blue excess', 
+            e: 'Cu<sup>2+</sup>(aq) + 2OH<sup>-</sup>(aq) &rarr; Cu(OH)<sub>2</sub>(s)' 
+        },
+        'nh3_few': { 
+            t: 'Light blue precipitate formed.', 
+            c: 'ppt-blue', 
+            e: 'Cu<sup>2+</sup>(aq) + 2OH<sup>-</sup>(aq) &rarr; Cu(OH)<sub>2</sub>(s)' 
+        },
+        'nh3_excess': { 
+            t: 'Precipitate dissolves to form a deep blue solution.', 
+            c: 'sol-deep-blue', 
+            e: 'Precipitate dissolves (No precipitation equation).' 
+        }
+    },
+    'fe2': {
+        'naoh_few': { 
+            t: 'Green precipitate formed.', 
+            c: 'ppt-green', 
+            e: 'Fe<sup>2+</sup>(aq) + 2OH<sup>-</sup>(aq) &rarr; Fe(OH)<sub>2</sub>(s)' 
+        },
+        'naoh_excess': { 
+            t: 'Green precipitate remains (Insoluble).', 
+            c: 'ppt-green excess', 
+            e: 'Precipitate remains insoluble.' 
+        },
+        'nh3_few': { 
+            t: 'Green precipitate formed.', 
+            c: 'ppt-green', 
+            e: 'Fe<sup>2+</sup>(aq) + 2OH<sup>-</sup>(aq) &rarr; Fe(OH)<sub>2</sub>(s)' 
+        },
+        'nh3_excess': { 
+            t: 'Green precipitate remains (Insoluble).', 
+            c: 'ppt-green excess', 
+            e: 'Precipitate remains insoluble.' 
+        }
+    },
+    'fe3': {
+        'naoh_few': { 
+            t: 'Red-brown precipitate formed.', 
+            c: 'ppt-red', 
+            e: 'Fe<sup>3+</sup>(aq) + 3OH<sup>-</sup>(aq) &rarr; Fe(OH)<sub>3</sub>(s)' 
+        },
+        'naoh_excess': { 
+            t: 'Red-brown precipitate remains (Insoluble).', 
+            c: 'ppt-red excess', 
+            e: 'Precipitate remains insoluble.' 
+        },
+        'nh3_few': { 
+            t: 'Red-brown precipitate formed.', 
+            c: 'ppt-red', 
+            e: 'Fe<sup>3+</sup>(aq) + 3OH<sup>-</sup>(aq) &rarr; Fe(OH)<sub>3</sub>(s)' 
+        },
+        'nh3_excess': { 
+            t: 'Red-brown precipitate remains (Insoluble).', 
+            c: 'ppt-red excess', 
+            e: 'Precipitate remains insoluble.' 
+        }
+    },
+    'nh4': {
+        'naoh_few': { 
+            t: 'Ammonia gas produced on warming.', 
+            c: 'clear', 
+            e: 'NH<sub>4</sub><sup>+</sup>(aq) + OH<sup>-</sup>(aq) &rarr; NH<sub>3</sub>(g) + H<sub>2</sub>O(l)' 
+        },
+        'naoh_excess': { 
+            t: 'Ammonia gas produced on warming.', 
+            c: 'clear excess', 
+            e: 'NH<sub>4</sub><sup>+</sup>(aq) + OH<sup>-</sup>(aq) &rarr; NH<sub>3</sub>(g) + H<sub>2</sub>O(l)' 
+        },
+        'nh3_few': { 
+            t: 'No visible reaction.', 
+            c: 'clear', 
+            e: '-' 
+        },
+        'nh3_excess': { 
+            t: 'No visible reaction.', 
+            c: 'clear excess', 
+            e: '-' 
+        }
+    }
 };
 
-const pinInput = document.getElementById('pin-input');
-const startBtn = document.getElementById('start-btn');
-const errorMsg = document.getElementById('error-msg');
-const mainContainer = document.getElementById('main-container');
-
-// Game UI
-const nianElem = document.getElementById('nian');
-const healthFill = document.getElementById('health-bar-fill');
-const projectile = document.getElementById('projectile');
-const timerBar = document.getElementById('timer-bar');
-const comboBox = document.getElementById('combo-box');
-const comboCount = document.getElementById('combo-count');
-const damageTextContainer = document.getElementById('damage-text-container');
-const particlesContainer = document.getElementById('particles-container');
-
-const qText = document.getElementById('question-text');
-const optionsGrid = document.getElementById('options-grid');
-const progressInd = document.getElementById('progress-indicator');
-const scoreInd = document.getElementById('score-indicator');
-
-// --- Event Listeners ---
-startBtn.addEventListener('click', attemptLogin);
-document.getElementById('restart-btn').addEventListener('click', () => location.reload());
-pinInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') attemptLogin(); });
-
-// --- Core Functions ---
-
-async function attemptLogin() {
-    const pin = pinInput.value.trim();
-    if (!pin) return;
-
-    const filePath = `worksheets/${pin}.json`;
-
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) throw new Error("File not found");
-        const data = await response.json();
-        
-        if (Array.isArray(data) && data.length > 0) {
-            questions = data;
-            startGame();
-        } else {
-            showError("Invalid JSON.");
-        }
-    } catch (err) {
-        showError("Worksheet not found. Check the PIN.");
+function runTest(reagent) {
+    const ion = document.getElementById('ionSelect').value;
+    const res = reactions[ion][reagent];
+    if (res) {
+        obsText.innerText = res.t;
+        eqText.innerHTML = res.e; 
+        chemical.className = 'chemical ' + res.c;
     }
 }
 
-function showError(msg) {
-    errorMsg.textContent = msg;
-    errorMsg.classList.remove('hidden');
+function resetLab() {
+    chemical.className = 'chemical clear';
+    chemical.style.height = '25%';
+    obsText.innerText = 'Colorless Solution';
+    eqText.innerHTML = 'No reaction yet.';
 }
 
-function startGame() {
-    screens.login.classList.remove('active');
-    screens.game.classList.add('active');
-    screens.game.classList.remove('hidden');
+// --- QUIZ DATA ---
+const questions = [
+    // --- DIRECT QUESTIONS ---
+    { 
+        q: "Which gas turns damp red litmus paper blue?", 
+        options: ["Chlorine", "Ammonia", "Oxygen", "Hydrogen"], 
+        a: 1 
+    },
+    { 
+        q: "Which ion forms a white precipitate with acidified Silver Nitrate?", 
+        options: ["Chloride", "Sulfate", "Nitrate", "Carbonate"], 
+        a: 0 
+    },
+    { 
+        q: "What is observed when Aqueous Sodium Hydroxide is added to Iron(II) ions?", 
+        options: ["White ppt", "Red-brown ppt", "Green ppt", "Blue ppt"], 
+        a: 2 
+    },
+    { 
+        q: "Which cation produces Ammonia gas when warmed with Aqueous NaOH and Aluminium foil?", 
+        options: ["Ammonium", "Nitrate", "Zinc", "Calcium"], 
+        a: 1 
+    },
+    
+    // --- FLOWCHART / DEDUCTION QUESTIONS ---
+    { 
+        q: "<strong>Flowchart Step 1:</strong> Add Aqueous NaOH &rarr; White precipitate formed.<br><strong>Flowchart Step 2:</strong> Add Excess Aqueous NaOH &rarr; Precipitate dissolves.<br><strong>Flowchart Step 3:</strong> Add Aqueous Ammonia &rarr; White precipitate formed.<br><strong>Flowchart Step 4:</strong> Add Excess Aqueous Ammonia &rarr; Precipitate remains insoluble.<br><br>Identify the Cation.", 
+        options: ["Zinc (Zn²⁺)", "Aluminium (Al³⁺)", "Calcium (Ca²⁺)", "Lead (Pb²⁺)"], 
+        a: 1 // Aluminium is insoluble in excess ammonia
+    },
+    { 
+        q: "<strong>Flowchart Step 1:</strong> Add Aqueous NaOH &rarr; White precipitate formed.<br><strong>Flowchart Step 2:</strong> Add Excess Aqueous NaOH &rarr; Precipitate dissolves.<br><strong>Flowchart Step 3:</strong> Add Aqueous Ammonia &rarr; White precipitate formed.<br><strong>Flowchart Step 4:</strong> Add Excess Aqueous Ammonia &rarr; Precipitate dissolves.<br><br>Identify the Cation.", 
+        options: ["Zinc (Zn²⁺)", "Aluminium (Al³⁺)", "Calcium (Ca²⁺)", "Copper (Cu²⁺)"], 
+        a: 0 // Zinc is soluble in both
+    },
+    { 
+        q: "<strong>Mystery Solution X:</strong><br>1. Acidify with Nitric Acid.<br>2. Add Barium Nitrate.<br>3. Result: White precipitate formed.<br><br>What anion is present?", 
+        options: ["Chloride", "Sulfate", "Nitrate", "Carbonate"], 
+        a: 1 
+    },
+    { 
+        q: "<strong>Flowchart Step 1:</strong> Add Aqueous NaOH &rarr; Light blue precipitate.<br><strong>Flowchart Step 2:</strong> Add Excess Aqueous Ammonia &rarr; Precipitate dissolves to form a Deep Blue Solution.<br><br>Identify the Cation.", 
+        options: ["Iron(II)", "Copper(II)", "Zinc", "Calcium"], 
+        a: 1 
+    },
+    { 
+        q: "<strong>Mystery Cation Y:</strong><br>Forms a White precipitate with Aqueous Sodium Hydroxide, but NO precipitate with Aqueous Ammonia.<br><br>Identify Y.", 
+        options: ["Zinc", "Aluminium", "Calcium", "Ammonium"], 
+        a: 2 // Calcium
+    },
+    {
+        q: "<strong>Gas Test Flowchart:</strong><br>1. Insert lighted splint into gas jar.<br>2. Result: 'Pop' sound heard.<br><br>Identify the gas.",
+        options: ["Hydrogen", "Oxygen", "Carbon Dioxide", "Ammonia"],
+        a: 0
+    }
+];
 
-    currentIdx = 0;
-    score = 0;
-    nianHP = 100;
-    combo = 0;
-    updateHealthUI();
-    loadQuestion();
-}
+let qIdx = 0;
+let score = 0;
 
 function loadQuestion() {
-    if (currentIdx >= questions.length) {
-        endGame();
+    // End of Quiz
+    if(qIdx >= questions.length) {
+        document.getElementById('questionText').innerText = "Quiz Completed!";
+        document.getElementById('optionsContainer').innerHTML = `
+            <div style="margin-bottom:20px;">You scored ${score} out of ${questions.length}</div>
+            <button onclick="location.reload()" style="background:#27ae60; color:white; border:none; padding:15px; cursor:pointer; border-radius:5px;">Restart Quiz</button>`;
+        document.getElementById('nextBtn').style.display = 'none';
+        document.getElementById('feedbackText').innerText = "";
         return;
     }
 
-    const q = questions[currentIdx];
-    qText.textContent = q.question;
-    progressInd.textContent = `Q ${currentIdx + 1}/${questions.length}`;
-    scoreInd.textContent = `Score: ${score}`;
+    const q = questions[qIdx];
+    // Use innerHTML to render the <br> tags in flowchart questions
+    document.getElementById('questionText').innerHTML = "Question " + (qIdx+1) + ":<br><br>" + q.q;
     
-    // Reset Timer
-    clearInterval(timerInterval);
-    questionStartTime = Date.now();
-    timerBar.style.width = '100%';
+    const opts = document.getElementById('optionsContainer');
+    opts.innerHTML = '';
+    document.getElementById('feedbackText').innerText = '';
+    document.getElementById('nextBtn').style.display = 'none';
     
-    // Start Timer Visual
-    timerInterval = setInterval(() => {
-        const elapsed = Date.now() - questionStartTime;
-        const remainingPct = Math.max(0, 100 - (elapsed / TIME_LIMIT * 100));
-        timerBar.style.width = `${remainingPct}%`;
-        
-        // Color change based on time
-        if(remainingPct < 30) timerBar.style.background = 'red';
-        else if(remainingPct < 60) timerBar.style.background = 'orange';
-        else timerBar.style.background = 'var(--gold)';
-        
-    }, 100);
-
-    // Render Options
-    optionsGrid.innerHTML = '';
-    q.options.forEach(opt => {
+    q.options.forEach((o, i) => {
         const btn = document.createElement('button');
-        btn.className = 'opt-btn';
-        btn.textContent = opt;
-        btn.onclick = () => handleAnswer(btn, opt, q.answer);
-        optionsGrid.appendChild(btn);
+        btn.innerText = o;
+        btn.onclick = () => check(i, q.a, btn);
+        opts.appendChild(btn);
     });
 }
 
-function handleAnswer(btn, selected, correct) {
-    clearInterval(timerInterval); // Stop timer immediately
-    const allBtns = document.querySelectorAll('.opt-btn');
-    allBtns.forEach(b => b.disabled = true);
-
-    if (selected === correct) {
-        btn.classList.add('correct');
-        handleCorrect();
+function check(sel, corr, btn) {
+    const all = document.querySelectorAll('.options-grid button');
+    all.forEach(b => b.disabled = true);
+    
+    if(sel === corr) {
+        score++;
+        document.getElementById('scoreVal').innerText = score;
+        document.getElementById('feedbackText').innerHTML = "Correct! ✅";
+        document.getElementById('feedbackText').style.color = "green";
+        btn.style.background = "#27ae60";
     } else {
-        btn.classList.add('wrong');
-        allBtns.forEach(b => {
-            if(b.textContent === correct) b.classList.add('correct');
-        });
-        handleWrong();
+        document.getElementById('feedbackText').innerHTML = "Incorrect. <br>The correct answer was: " + questions[qIdx].options[corr];
+        document.getElementById('feedbackText').style.color = "#c0392b";
+        btn.style.background = "#c0392b";
     }
-}
-
-function handleCorrect() {
-    combo++;
-    if(combo > maxCombo) maxCombo = combo;
-    
-    // Update Combo UI
-    comboBox.classList.remove('hidden');
-    comboCount.textContent = `x${combo}`;
-    
-    // Calculate Damage & Score based on Speed and Combo
-    const timeTaken = Date.now() - questionStartTime;
-    
-    // Base Damage per question (ensure we kill Nian if all correct)
-    let baseDamage = 100 / questions.length;
-    
-    // Speed Multiplier (Fast = 1.5x, Slow = 0.8x)
-    let speedMult = 1;
-    let isCrit = false;
-    
-    if(timeTaken < 3000) { speedMult = 1.5; isCrit = true; } // Under 3 sec
-    else if(timeTaken > 10000) { speedMult = 0.8; } // Over 10 sec
-
-    // Combo Multiplier
-    let comboMult = 1 + (combo * 0.1); // +10% per combo
-
-    // Final Calc
-    let totalDamage = baseDamage * speedMult * comboMult;
-    let points = Math.floor(100 * speedMult * comboMult);
-    score += points;
-
-    performAttack(totalDamage, isCrit);
-}
-
-function handleWrong() {
-    combo = 0;
-    comboBox.classList.add('hidden');
-    setTimeout(nextQuestion, 1500);
-}
-
-function performAttack(damage, isCrit) {
-    // 1. Firecracker Animation
-    projectile.classList.remove('hidden');
-    projectile.classList.add('throw-anim');
-
-    // 2. Impact
-    setTimeout(() => {
-        projectile.classList.add('hidden');
-        projectile.classList.remove('throw-anim');
-        
-        // Spawn Particles
-        spawnExplosion(nianElem.getBoundingClientRect());
-        
-        // Show Damage Text
-        showFloatingText(Math.floor(damage), isCrit);
-
-        // Shake Nian
-        nianElem.classList.add('hit-anim');
-        
-        // Crit Shake Screen
-        if(isCrit) mainContainer.classList.add('screen-shake');
-
-        // Apply Damage
-        nianHP = Math.max(0, nianHP - damage);
-        updateHealthUI();
-
-        // Cleanup
-        setTimeout(() => {
-            nianElem.classList.remove('hit-anim');
-            mainContainer.classList.remove('screen-shake');
-            nextQuestion();
-        }, 500);
-
-    }, 400); // Matches throw animation duration
-}
-
-function spawnExplosion(rect) {
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    for (let i = 0; i < 20; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        
-        // Random direction
-        const x = (Math.random() - 0.5) * 200 + 'px';
-        const y = (Math.random() - 0.5) * 200 + 'px';
-        const color = Math.random() > 0.5 ? 'red' : 'gold';
-        
-        p.style.setProperty('--x', x);
-        p.style.setProperty('--y', y);
-        p.style.background = color;
-        p.style.left = centerX + 'px';
-        p.style.top = centerY + 'px';
-
-        particlesContainer.appendChild(p);
-        
-        // Remove particle after anim
-        setTimeout(() => p.remove(), 800);
-    }
-}
-
-function showFloatingText(amount, isCrit) {
-    const div = document.createElement('div');
-    div.className = isCrit ? 'damage-text crit' : 'damage-text';
-    div.textContent = isCrit ? `CRIT! -${amount}` : `-${amount}`;
-    damageTextContainer.appendChild(div);
-    setTimeout(() => div.remove(), 1000);
-}
-
-function updateHealthUI() {
-    healthFill.style.width = `${nianHP}%`;
-    if(nianHP < 30) healthFill.style.background = '#ff0000';
+    document.getElementById('nextBtn').style.display = 'inline-block';
 }
 
 function nextQuestion() {
-    currentIdx++;
+    qIdx++;
     loadQuestion();
 }
 
-function endGame() {
-    screens.game.classList.remove('active');
-    screens.game.classList.add('hidden');
-    screens.end.classList.add('active');
-    screens.end.classList.remove('hidden');
-
-    const title = document.getElementById('end-title');
-    const msg = document.getElementById('end-message');
-    document.getElementById('final-score').textContent = score;
-    document.getElementById('max-combo').textContent = maxCombo;
-
-    if (nianHP <= 5) {
-        title.textContent = "VICTORY!";
-        title.style.color = "#D90429";
-        msg.textContent = "You defeated the Nian with your speed and accuracy!";
-    } else {
-        title.textContent = "GAME OVER";
-        title.style.color = "#555";
-        msg.textContent = "The Nian is still standing. Be faster next time!";
-    }
-}
+window.onload = loadQuestion;
