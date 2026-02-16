@@ -16,7 +16,6 @@ const chemical = document.getElementById('chemical');
 const obsText = document.getElementById('obsText');
 const eqText = document.getElementById('eqText');
 
-// Reaction Data
 const reactions = {
     'zn': {
         'naoh_few': { t: 'White precipitate formed.', c: 'ppt-white', e: 'Zn<sup>2+</sup>(aq) + 2OH<sup>-</sup>(aq) &rarr; Zn(OH)<sub>2</sub>(s)' },
@@ -81,19 +80,25 @@ function resetLab() {
 
 // --- EXTENDED QUIZ BANK (18 Questions) ---
 const questionBank = [
-    // FLOWCHART QUESTIONS (Visuals)
+    // FLOWCHART QUESTIONS (Branching)
     { 
         html: `
             <div class="flowchart-container">
-                <div class="flow-step flow-unknown">Unknown Solution P</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-action">+ Aqueous NaOH (Excess)</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-step">White precipitate dissolves</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-action">+ Aqueous Ammonia (Excess)</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-step">White precipitate remains</div>
+                <div class="flow-unknown">Unknown Solution P</div>
+                <div class="flow-split">
+                    <div class="flow-branch">
+                        <div class="flow-arrow">↙</div>
+                        <div class="flow-action">+ Aq. NaOH (Excess)</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-result">Ppt dissolves in excess</div>
+                    </div>
+                    <div class="flow-branch">
+                        <div class="flow-arrow">↘</div>
+                        <div class="flow-action">+ Aq. Ammonia (Excess)</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-result">Ppt remains insoluble</div>
+                    </div>
+                </div>
             </div>
             <p>Identify Solution P.</p>
         `,
@@ -103,15 +108,21 @@ const questionBank = [
     { 
         html: `
             <div class="flowchart-container">
-                <div class="flow-step flow-unknown">Unknown Solution Q</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-action">+ Aqueous NaOH</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-step">Light Blue Precipitate</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-action">+ Aqueous Ammonia (Excess)</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-step">Deep Blue Solution</div>
+                <div class="flow-unknown">Unknown Solution Q</div>
+                <div class="flow-split">
+                    <div class="flow-branch">
+                        <div class="flow-arrow">↙</div>
+                        <div class="flow-action">+ Aq. NaOH</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-result">Light Blue Ppt</div>
+                    </div>
+                    <div class="flow-branch">
+                        <div class="flow-arrow">↘</div>
+                        <div class="flow-action">+ Aq. Ammonia (Excess)</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-result">Deep Blue Solution</div>
+                    </div>
+                </div>
             </div>
             <p>Identify Solution Q.</p>
         `,
@@ -121,15 +132,21 @@ const questionBank = [
     { 
         html: `
             <div class="flowchart-container">
-                <div class="flow-step flow-unknown">Unknown Solution R</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-action">+ Aqueous NaOH (Excess)</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-step">White precipitate dissolves</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-action">+ Aqueous Ammonia (Excess)</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-step">White precipitate dissolves</div>
+                <div class="flow-unknown">Unknown Solution R</div>
+                <div class="flow-split">
+                    <div class="flow-branch">
+                        <div class="flow-arrow">↙</div>
+                        <div class="flow-action">+ Aq. NaOH (Excess)</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-result">Ppt dissolves</div>
+                    </div>
+                    <div class="flow-branch">
+                        <div class="flow-arrow">↘</div>
+                        <div class="flow-action">+ Aq. Ammonia (Excess)</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-result">Ppt dissolves</div>
+                    </div>
+                </div>
             </div>
             <p>Identify Solution R.</p>
         `,
@@ -139,15 +156,21 @@ const questionBank = [
     { 
         html: `
             <div class="flowchart-container">
-                <div class="flow-step flow-unknown">Unknown Solution S</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-action">+ Aqueous NaOH</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-step">Green Precipitate</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-action">+ Excess NaOH</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-step">Precipitate Insoluble</div>
+                <div class="flow-unknown">Unknown Solution S</div>
+                <div class="flow-split">
+                    <div class="flow-branch">
+                        <div class="flow-arrow">↙</div>
+                        <div class="flow-action">+ Aq. NaOH</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-result">Green Ppt</div>
+                    </div>
+                    <div class="flow-branch">
+                        <div class="flow-arrow">↘</div>
+                        <div class="flow-action">+ Aq. Ammonia</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-result">Green Ppt</div>
+                    </div>
+                </div>
             </div>
             <p>Identify Solution S.</p>
         `,
@@ -157,13 +180,21 @@ const questionBank = [
     { 
         html: `
             <div class="flowchart-container">
-                <div class="flow-step flow-unknown">Unknown Anion T</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-action">+ Dilute Nitric Acid</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-action">+ Silver Nitrate</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-step">Yellow Precipitate</div>
+                <div class="flow-unknown">Unknown Anion T</div>
+                <div class="flow-split">
+                    <div class="flow-branch">
+                        <div class="flow-action">Test 1</div>
+                        <div class="flow-action">+ Dilute Nitric Acid</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-result">No Gas</div>
+                    </div>
+                    <div class="flow-branch">
+                        <div class="flow-action">Test 2</div>
+                        <div class="flow-action">+ Silver Nitrate</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-result">Yellow Ppt</div>
+                    </div>
+                </div>
             </div>
             <p>Identify Anion T.</p>
         `,
@@ -173,15 +204,21 @@ const questionBank = [
     { 
         html: `
             <div class="flowchart-container">
-                <div class="flow-step flow-unknown">Unknown Solution U</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-action">+ Aqueous NaOH</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-step">White Precipitate</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-action">+ Aqueous Ammonia</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-step">No Precipitate / Very Slight</div>
+                <div class="flow-unknown">Unknown Solution U</div>
+                <div class="flow-split">
+                    <div class="flow-branch">
+                        <div class="flow-arrow">↙</div>
+                        <div class="flow-action">+ Aq. NaOH</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-result">White Ppt</div>
+                    </div>
+                    <div class="flow-branch">
+                        <div class="flow-arrow">↘</div>
+                        <div class="flow-action">+ Aq. Ammonia</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-result">No Ppt / Very Slight</div>
+                    </div>
+                </div>
             </div>
             <p>Identify Solution U.</p>
         `,
@@ -210,7 +247,6 @@ let qIdx = 0;
 let score = 0;
 
 function shuffleArray(array) {
-    // Fisher-Yates shuffle
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
@@ -221,18 +257,14 @@ function shuffleArray(array) {
 function startQuiz() {
     qIdx = 0;
     score = 0;
-    // Clone and shuffle
     const shuffled = shuffleArray([...questionBank]);
-    // Pick first 6
-    currentQuiz = shuffled.slice(0, 6);
-    
+    currentQuiz = shuffled.slice(0, 6); // Pick 6
     document.getElementById('totalVal').innerText = currentQuiz.length;
     document.getElementById('scoreVal').innerText = "0";
     loadQuestion();
 }
 
 function loadQuestion() {
-    // Check End
     if(qIdx >= currentQuiz.length) {
         document.getElementById('questionArea').innerHTML = `<h3>Quiz Completed!</h3>`;
         document.getElementById('optionsContainer').innerHTML = `
@@ -246,7 +278,6 @@ function loadQuestion() {
     const q = currentQuiz[qIdx];
     const qArea = document.getElementById('questionArea');
     
-    // Check if question is HTML type (Flowchart) or Text type
     if (q.html) {
         qArea.innerHTML = `<div style="font-weight:bold; margin-bottom:10px;">Question ${qIdx+1}:</div>` + q.html;
     } else {
@@ -289,5 +320,5 @@ function nextQuestion() {
     loadQuestion();
 }
 
-// Initial Load
+// Init
 window.onload = startQuiz;
