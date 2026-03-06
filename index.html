@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QA Virtual Lab</title>
+    <title>QA Master: O-Level Practical Prep</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 </head>
 <body>
 
     <nav>
-        <div class="logo">QA Master 🧪</div>
+        <div class="logo">QA Master <span class="subtitle">O-Level Practical Prep</span></div>
         <div class="nav-links">
-            <button onclick="showSection('learn')">Learn</button>
+            <button onclick="showSection('learn')">Reference</button>
             <button onclick="showSection('lab')">Virtual Lab</button>
             <button onclick="showSection('quiz')">Quiz</button>
         </div>
     </nav>
 
     <main>
-
-        <!-- SECTION 1: LEARN -->
-        <section id="learn" class="active-section">
-            <h2>Reference Material</h2>
+        <!-- REFERENCE SECTION -->
+        <section id="learn">
+            <h2>Qualitative Analysis Notes</h2>
             <div class="tabs-header">
                 <button onclick="openTab('cations')" class="tab-btn active-tab">Cations</button>
                 <button onclick="openTab('anions')" class="tab-btn">Anions</button>
@@ -30,131 +35,180 @@
             </div>
 
             <div id="cations" class="tab-content active-content">
-                <h3>Testing for Cations</h3>
                 <table>
                     <thead>
-                        <tr>
-                            <th>Ion</th>
-                            <th>Effect of Aqueous Sodium Hydroxide</th>
-                            <th>Effect of Aqueous Ammonia</th>
-                        </tr>
+                        <tr><th>Ion</th><th>NaOH (aq)</th><th>Aqueous Ammonia</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>Zinc (Zn²⁺)</td><td>White precipitate formed.<br>Soluble in excess to form a colorless solution.</td><td>White precipitate formed.<br>Soluble in excess to form a colorless solution.</td></tr>
-                        <tr><td>Aluminium (Al³⁺)</td><td>White precipitate formed.<br>Soluble in excess to form a colorless solution.</td><td>White precipitate formed.<br>Insoluble in excess.</td></tr>
-                        <tr><td>Calcium (Ca²⁺)</td><td>White precipitate formed.<br>Insoluble in excess.</td><td>No precipitate formed (or very slight).</td></tr>
-                        <tr><td>Copper(II) (Cu²⁺)</td><td>Light blue precipitate formed.<br>Insoluble in excess.</td><td>Light blue precipitate formed.<br>Soluble in excess to form a deep blue solution.</td></tr>
-                        <tr><td>Iron(II) (Fe²⁺)</td><td>Green precipitate formed.<br>Insoluble in excess.</td><td>Green precipitate formed.<br>Insoluble in excess.</td></tr>
-                        <tr><td>Iron(III) (Fe³⁺)</td><td>Red-brown precipitate formed.<br>Insoluble in excess.</td><td>Red-brown precipitate formed.<br>Insoluble in excess.</td></tr>
-                        <tr><td>Ammonium (NH₄⁺)</td><td>Ammonia gas produced on warming.</td><td>-</td></tr>
+                        <tr><td>Ammonium (NH₄⁺)</td><td>Ammonia produced on warming</td><td>-</td></tr>
+                        <tr><td>Zinc (Zn²⁺)</td><td>White ppt, soluble in excess</td><td>White ppt, soluble in excess</td></tr>
+                        <tr><td>Aluminium (Al³⁺)</td><td>White ppt, soluble in excess</td><td>White ppt, insoluble in excess</td></tr>
+                        <tr><td>Calcium (Ca²⁺)</td><td>White ppt, insoluble in excess</td><td>No ppt</td></tr>
+                        <tr><td>Copper(II) (Cu²⁺)</td><td>Light blue ppt, insoluble</td><td>Light blue ppt, soluble (deep blue sol)</td></tr>
+                        <tr><td>Iron(II) (Fe²⁺)</td><td>Green ppt, insoluble</td><td>Green ppt, insoluble</td></tr>
+                        <tr><td>Iron(III) (Fe³⁺)</td><td>Red-brown ppt, insoluble</td><td>Red-brown ppt, insoluble</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <div id="anions" class="tab-content">
-                <h3>Testing for Anions</h3>
                 <table>
                     <thead><tr><th>Ion</th><th>Test</th><th>Result</th></tr></thead>
                     <tbody>
-                        <tr><td>Carbonate (CO₃²⁻)</td><td>Add dilute acid</td><td>Effervescence observed. Carbon Dioxide gas produced.</td></tr>
-                        <tr><td>Chloride (Cl⁻)</td><td>Acidify with Nitric Acid, then add Silver Nitrate</td><td>White precipitate formed.</td></tr>
-                        <tr><td>Iodide (I⁻)</td><td>Acidify with Nitric Acid, then add Silver Nitrate</td><td>Yellow precipitate formed.</td></tr>
-                        <tr><td>Nitrate (NO₃⁻)</td><td>Add Aqueous NaOH and Aluminium foil; warm gently</td><td>Ammonia gas produced.</td></tr>
-                        <tr><td>Sulfate (SO₄²⁻)</td><td>Acidify with Nitric Acid, then add Barium Nitrate</td><td>White precipitate formed.</td></tr>
+                        <tr><td>Carbonate (CO₃²⁻)</td><td>Add dilute acid.</td><td>Effervescence, CO₂ produced.</td></tr>
+                        <tr><td>Chloride (Cl⁻)</td><td>Acidify (HNO₃), then add AgNO₃.</td><td>White ppt.</td></tr>
+                        <tr><td>Iodide (I⁻)</td><td>Acidify (HNO₃), then add AgNO₃.</td><td>Yellow ppt.</td></tr>
+                        <tr><td>Nitrate (NO₃⁻)</td><td>Add NaOH, then Al foil; warm.</td><td>Ammonia gas produced.</td></tr>
+                        <tr><td>Sulfate (SO₄²⁻)</td><td>Acidify (HNO₃), then add Ba(NO₃)₂.</td><td>White ppt.</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <div id="gases" class="tab-content">
-                <h3>Testing for Gases</h3>
                 <div class="gas-grid">
-                    <div class="card"><strong>Ammonia (NH₃)</strong><br>Turns damp red litmus paper blue.</div>
-                    <div class="card"><strong>Carbon Dioxide (CO₂)</strong><br>Turns limewater milky (White precipitate formed).</div>
-                    <div class="card"><strong>Chlorine (Cl₂)</strong><br>Bleaches damp litmus paper.</div>
-                    <div class="card"><strong>Hydrogen (H₂)</strong><br>Extinguishes a lighted splint with a "pop" sound.</div>
-                    <div class="card"><strong>Oxygen (O₂)</strong><br>Relights a glowing splint.</div>
+                    <div class="card"><strong>NH₃:</strong> Pungent, turns damp red litmus blue.</div>
+                    <div class="card"><strong>CO₂:</strong> Colorless, turns limewater milky.</div>
+                    <div class="card"><strong>Cl₂:</strong> Green-yellow, bleaches damp litmus.</div>
+                    <div class="card"><strong>H₂:</strong> 'Pop' with lighted splint.</div>
+                    <div class="card"><strong>O₂:</strong> Relights glowing splint.</div>
+                    <div class="card"><strong>SO₂:</strong> Turns acidified KMnO₄ colorless.</div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: VIRTUAL LAB -->
-        <section id="lab">
-            <h2>Virtual Laboratory</h2>
+        <!-- LAB SECTION -->
+        <section id="lab" class="active-section">
             <div class="lab-layout">
-                
-                <!-- Controls -->
                 <div class="lab-controls">
-                    <h3>1. Select Unknown Ion</h3>
-                    <select id="ionSelect">
-                        <option value="zn">Zinc (Zn²⁺)</option>
-                        <option value="al">Aluminium (Al³⁺)</option>
-                        <option value="ca">Calcium (Ca²⁺)</option>
-                        <option value="cu">Copper(II) (Cu²⁺)</option>
-                        <option value="fe2">Iron(II) (Fe²⁺)</option>
-                        <option value="fe3">Iron(III) (Fe³⁺)</option>
-                        <option value="nh4">Ammonium (NH₄⁺)</option>
-                    </select>
-
-                    <h3>2. Add Reagent</h3>
-                    <div class="reagent-grid">
-                        <button onclick="runTest('naoh_few')">+ NaOH (Few)</button>
-                        <button onclick="runTest('naoh_excess')">+ NaOH (Excess)</button>
-                        <button onclick="runTest('nh3_few')">+ NH₃ (Few)</button>
-                        <button onclick="runTest('nh3_excess')">+ NH₃ (Excess)</button>
+                    <div class="lab-mode-toggle">
+                        <button id="btn-cation" class="mode-btn active-mode" onclick="setLabMode('cation')">Cation</button>
+                        <button id="btn-anion" class="mode-btn" onclick="setLabMode('anion')">Anion</button>
+                        <button id="btn-gas" class="mode-btn" onclick="setLabMode('gas')">Gas Test</button>
+                        <button id="btn-mystery" class="mode-btn" onclick="setLabMode('mystery')">Mystery Salt</button>
                     </div>
-                    <button class="reset-btn" onclick="resetLab()">Reset Test Tube</button>
-                    
-                    <div class="tip-box">
-                        <strong>Visual Guide:</strong><br>
-                        Look at the grid lines behind the tube.<br>
-                        ✅ Lines visible = <strong>Solution</strong><br>
-                        ❌ Lines blocked = <strong>Precipitate</strong>
-                    </div>
-                </div>
 
-                <!-- Visuals -->
-                <div class="lab-visuals">
-                    <div class="lab-bench">
-                        <div class="test-tube">
-                            <!-- Chemical -->
-                            <div id="chemical" class="chemical clear"></div>
-                            <!-- Glass Shine -->
-                            <div class="glass-shine"></div>
+                    <div id="cation-controls" class="control-group">
+                        <h3>Select Cation Solution</h3>
+                        <select id="cationSelect" onchange="resetLab()">
+                            <option value="nh4">Ammonium (NH₄⁺)</option>
+                            <option value="zn">Zinc (Zn²⁺)</option>
+                            <option value="al">Aluminium (Al³⁺)</option>
+                            <option value="ca">Calcium (Ca²⁺)</option>
+                            <option value="cu">Copper(II) (Cu²⁺)</option>
+                            <option value="fe2">Iron(II) (Fe²⁺)</option>
+                            <option value="fe3">Iron(III) (Fe³⁺)</option>
+                        </select>
+                        <h3>Add Reagent</h3>
+                        <div class="reagent-grid">
+                            <button onclick="runTest('naoh_few')">NaOH (few)</button>
+                            <button onclick="runTest('naoh_excess')">NaOH (excess)</button>
+                            <button onclick="runTest('nh3_few')">NH₃ (few)</button>
+                            <button onclick="runTest('nh3_excess')">NH₃ (excess)</button>
                         </div>
                     </div>
-                    
-                    <div class="observation-box">
-                        <h4>Observation:</h4>
-                        <p id="obsText">Colorless Solution</p>
+
+                    <div id="anion-controls" class="control-group" style="display: none;">
+                        <h3>Select Anion Solution</h3>
+                        <select id="anionSelect" onchange="updateAnionReagents()">
+                            <option value="co3">Carbonate (CO₃²⁻)</option>
+                            <option value="cl">Chloride (Cl⁻)</option>
+                            <option value="i">Iodide (I⁻)</option>
+                            <option value="no3">Nitrate (NO₃⁻)</option>
+                            <option value="so4">Sulfate (SO₄²⁻)</option>
+                        </select>
+                        <h3>Specific Test Reagent</h3>
+                        <div class="reagent-grid" id="anion-reagent-container"></div>
                     </div>
 
-                    <!-- Ionic Equation Display -->
-                    <div class="equation-box">
-                        <h4>Ionic Equation:</h4>
-                        <p id="eqText" class="equation-text">No reaction yet.</p>
+                    <div id="gas-controls" class="control-group" style="display: none;">
+                        <h3>Select Gas Present</h3>
+                        <select id="gasSelect" onchange="resetLab()">
+                            <option value="nh3">Ammonia (NH₃)</option>
+                            <option value="co2">Carbon Dioxide (CO₂)</option>
+                            <option value="cl2">Chlorine (Cl₂)</option>
+                            <option value="h2">Hydrogen (H₂)</option>
+                            <option value="o2">Oxygen (O₂)</option>
+                            <option value="so2">Sulfur Dioxide (SO₂)</option>
+                        </select>
+                        <h3>Perform Standard Test</h3>
+                        <div class="reagent-grid">
+                            <button onclick="runGasTest()">Execute Test</button>
+                        </div>
                     </div>
+
+                    <div id="mystery-controls" class="control-group" style="display: none;">
+                        <button class="generate-btn" onclick="generateMystery()">🧪 Generate New Mystery Salt</button>
+                        <p id="mystery-status" style="margin-top:10px; font-weight:bold; color:var(--primary);">Status: No salt generated.</p>
+                        
+                        <h3 style="margin-top: 15px;">Test Reagents Toolkit</h3>
+                        <div class="reagent-grid">
+                            <button onclick="runTest('naoh_few', true)">NaOH (few)</button>
+                            <button onclick="runTest('naoh_excess', true)">NaOH (excess)</button>
+                            <button onclick="runTest('nh3_few', true)">NH₃ (few)</button>
+                            <button onclick="runTest('nh3_excess', true)">NH₃ (excess)</button>
+                            <button onclick="runTest('acid', true)">Dilute Acid</button>
+                            <button onclick="runTest('ag_test', true)">HNO₃ + AgNO₃</button>
+                            <button onclick="runTest('ba_test', true)">HNO₃ + Ba(NO₃)₂</button>
+                            <button onclick="runTest('nitrate_test', true)">NaOH + Al + Heat</button>
+                        </div>
+
+                        <h3 style="margin-top: 15px;">Submit Your Answer</h3>
+                        <select id="guessCation">
+                            <option value="" disabled selected>Guess Cation...</option>
+                            <option value="nh4">Ammonium (NH₄⁺)</option>
+                            <option value="zn">Zinc (Zn²⁺)</option>
+                            <option value="al">Aluminium (Al³⁺)</option>
+                            <option value="ca">Calcium (Ca²⁺)</option>
+                            <option value="cu">Copper(II) (Cu²⁺)</option>
+                            <option value="fe2">Iron(II) (Fe²⁺)</option>
+                            <option value="fe3">Iron(III) (Fe³⁺)</option>
+                        </select>
+                        <select id="guessAnion" style="margin-top: 5px;">
+                            <option value="" disabled selected>Guess Anion...</option>
+                            <option value="co3">Carbonate (CO₃²⁻)</option>
+                            <option value="cl">Chloride (Cl⁻)</option>
+                            <option value="i">Iodide (I⁻)</option>
+                            <option value="no3">Nitrate (NO₃⁻)</option>
+                            <option value="so4">Sulfate (SO₄²⁻)</option>
+                        </select>
+                        <button class="generate-btn" style="background:#27ae60; margin-top:5px;" onclick="checkMystery()">Submit Guess</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetLab()">Wash Apparatus</button>
                 </div>
 
+                <div class="lab-visuals">
+                    <div class="lab-bench">
+                        <div id="litmusPaperContainer" class="paper-container" style="display: none;">
+                            <div id="litmusPaper" class="litmus paper-neutral">Damp Litmus</div>
+                        </div>
+                        <div class="test-tube">
+                            <div id="chemical" class="chemical clear"></div>
+                        </div>
+                        <div id="splint" class="splint" style="display:none;"></div>
+                    </div>
+
+                    <div class="observation-box">
+                        <h4>Observation:</h4>
+                        <p id="obsText">Ready for testing...</p>
+                        <hr>
+                        <small>Ionic Equation:</small>
+                        <div id="eqText" class="equation-text">-</div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SECTION 3: QUIZ -->
+        <!-- QUIZ SECTION -->
         <section id="quiz">
-            <h2>Challenge Mode</h2>
             <div class="quiz-container">
-                <div class="score-display">Score: <span id="scoreVal">0</span> / <span id="totalVal">6</span></div>
-                
-                <!-- The Question Area (Text or Flowchart) -->
+                <div class="score-display">Score: <span id="scoreVal">0</span></div>
                 <div id="questionArea"></div>
-                
                 <div id="optionsContainer" class="options-grid"></div>
                 <div id="feedbackText" class="feedback"></div>
-                <button id="nextBtn" onclick="nextQuestion()">Next Question ➜</button>
+                <button id="nextBtn" style="display:none;" onclick="nextQuestion()">Next Challenge ➜</button>
             </div>
         </section>
-
     </main>
-
     <script src="script.js"></script>
 </body>
 </html>
